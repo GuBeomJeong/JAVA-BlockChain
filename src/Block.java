@@ -14,6 +14,7 @@ public class Block {
         this.previousHash = previousHash;
         this.timeStamp = new Date().getTime();
         this.hash = calculateHash();
+        this.nonce = 0;
 
     }
 

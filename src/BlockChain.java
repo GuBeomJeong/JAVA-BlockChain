@@ -15,7 +15,7 @@ public class BlockChain {
         blockchain.add(new Block("Third Block", blockchain.get(blockchain.size() -1).hash));
         blockchain.get(2).mineBlock(difficulty);
 
-        System.out.println("BlockChain Valid" + isChainValid());
+        System.out.println("BlockChain Valid: " + isChainValid());
 
     }
 
@@ -40,7 +40,7 @@ public class BlockChain {
             }
 
             if(!currentBlock.hash.substring(0, difficulty).equals(hashTarget)){
-                System.out.println("error");
+                System.out.println("채굴 되지 않음");
                 return false;
             }
 
