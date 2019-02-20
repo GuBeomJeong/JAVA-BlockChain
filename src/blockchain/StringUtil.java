@@ -1,6 +1,7 @@
 package blockchain;
 
 import java.security.*;
+import java.util.ArrayList;
 import java.util.Base64;
 
 public class StringUtil {
@@ -63,4 +64,34 @@ public class StringUtil {
     public static String getStringFromKey(Key key){
         return Base64.getEncoder().encodeToString(key.getEncoded());
     }
+
+    // (지갑이)트랜잭션에 필요한 데이터들을 머클트리로 구현하기 위함
+    // Merkle 트리를 만드는게 ㅏ니라 Merkle 트리의 root만을 반환
+    public static String getMerkleRoot(ArrayList<Transaction> transactions){
+        int count = transactions.size();
+        ArrayList<String> previousTreeLayer = new ArrayList<String>();
+
+        // 트랜잭션의 id값만 저장 ( hash값)
+        for(Transaction transaction : transactions){
+            previousTreeLayer.add(transaction.transactionId);
+        }
+
+        ArrayList<String> treeLayer = previousTreeLayer;
+
+        while(count > 1){
+            treeLayer = new ArrayList<String>();
+            for(int i=1;i < previousTreeLayer.size(); i=i+2){
+                treeLayer.add(applySha256(previousTreeLayer.get(i-1) + previousTreeLayer.get(i)));
+
+            }
+
+            count = treeLayer.size();
+            previousTreeLayer = treeLayer;
+
+        }
+        String merkleRoot = (treeLayer.size() == 1) ? treeLayer.get(0) : "";
+        return merkleRoot;
+
+    }
+
 }

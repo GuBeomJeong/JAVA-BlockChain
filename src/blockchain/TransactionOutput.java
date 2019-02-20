@@ -11,7 +11,7 @@ public class TransactionOutput {
     public float value; // 수취인에게 돌아갈 코인의 양
     public String parentTransactionId; // 해당 output이 포함된 transaction의 id
 
-    public TransactionOutput(PublicKey receipient, float value, String parentTransactionId){
+    public TransactionOutput(PublicKey reciepient, float value, String parentTransactionId){
         this.reciepient = reciepient;
         this.value = value;
         this.parentTransactionId = parentTransactionId;

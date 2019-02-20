@@ -49,7 +49,7 @@ public class Transaction {
         return StringUtil.verifyECDSASig(sender,data,signature);
     }
 
-    // 트랜잭션이 유요하면 true 반납
+    // 트랜잭션이 유효하면 true 반납
     // 트랜잭션 유효성 검사 -> 거래 할 UTXO가 충분한 지 확인
     // -> 거래금과 잔금 반환 -> 쓰인 UTXO 삭제, 새로운 output 생성
     public boolean processTransaction() {
