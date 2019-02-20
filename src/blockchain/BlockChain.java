@@ -131,6 +131,7 @@ public class BlockChain {
                     System.out.println("#Transaction(" + t + ") output reciepient is not who it should be");
                     return false;
                 }
+
                 // 거스듬론의 수취인이 정확한가?
                 if( currentTransaction.outputs.get(1).reciepient != currentTransaction.sender) {
                     System.out.println("#Transaction(" + t + ") output 'change' is not sender.");

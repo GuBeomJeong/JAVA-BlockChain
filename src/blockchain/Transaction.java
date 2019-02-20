@@ -59,6 +59,7 @@ public class Transaction {
             return false;
         }
 
+        // 지갑으로 부터 받은 inputs의 outputid를 통해 블록체인의 실제 UTXO를 받아온다??
         for (TransactionInput i : inputs) {
             i.UTXO = BlockChain.UTXOs.get(i.transactionOutputId);
         }

@@ -7,6 +7,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 // 블록체인(비트코인)에서 의미하는 지갑은 주소를 저장하고 트랜잭션을 생성할 수 있는 소프트웨어
+// 지갑이라고는 하지만 실제로 코인을 넣고 빼는 것이 아니다.
+// 트랜잭션 결과로 생긴 output을 추적하여 쓸 수 있는 코인이 있는지 확인한다.
 public class Wallet {
 
     // 지갑의 소유주를 구분하기 위해 필요하다.
@@ -14,6 +16,8 @@ public class Wallet {
     public PrivateKey privateKey;
     public PublicKey publicKey;
 
+    // 비트코인에서는 특수한 output에 대해 UTXO(Unspent Transaction Outputs)이라고 하며 사용하지 않은 거래의 출력이라고 한다.
+    // 새로운 트랜잭션을 생성하는 것은 UTXO를 추적하여 이전 거래의 output을 새로운 트랜잭션의 input으로 사용하는 것이다.
     public HashMap<String,TransactionOutput> UTXOs = new HashMap<String,TransactionOutput>();
 
 
@@ -64,6 +68,7 @@ public class Wallet {
 
         float total = 0;
 
+        // UTXO를 추적하여 사용할 수 있는 코인 확인 후 저장
         for(Map.Entry<String,TransactionOutput> item : UTXOs.entrySet()){
             TransactionOutput UTXO = item.getValue();
             total += UTXO.value;
